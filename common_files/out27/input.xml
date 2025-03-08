@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<gamd>
+    <temperature>310.0</temperature>
+    <system>
+        <nonbonded-method>pme</nonbonded-method>
+        <nonbonded-cutoff>0.9</nonbonded-cutoff>
+        <constraints>hbonds</constraints>
+        <switch-distance>1.0</switch-distance>
+        <ewald-error-tolerance>0.0005</ewald-error-tolerance>
+    </system>
+    <barostat>
+        <pressure>1.0</pressure>
+        <frequency>25</frequency>
+    </barostat>
+    <run-minimization>True</run-minimization>
+    <integrator>
+        <algorithm>langevin</algorithm>
+        <boost-type>upper-dual</boost-type>
+        <sigma0>
+            <primary>3.0</primary>
+            <secondary>3.0</secondary>
+        </sigma0>
+        <random-seed>10</random-seed>
+        <dt>0.002</dt>
+        <friction-coefficient>1.0</friction-coefficient>
+        <number-of-steps>
+            <conventional-md-prep>50000</conventional-md-prep>
+            <conventional-md>300000</conventional-md>
+            <gamd-equilibration-prep>100000</gamd-equilibration-prep>
+            <gamd-equilibration>200000</gamd-equilibration>
+            <gamd-production>100000</gamd-production>
+            <extension-steps>0</extension-steps>
+            <averaging-window-interval>50000</averaging-window-interval>
+        </number-of-steps>
+    </integrator>
+    <input-files>
+        <amber>
+            <topology>/home/anugraha/openmm_GaMD_anu_psc/ParGaMD_chig_2/common_files/chignolin.parm7</topology>
+            <coordinates type="rst7">/home/anugraha/openmm_GaMD_anu_psc/ParGaMD_chig_2/common_files/chignolin.rst7</coordinates>
+        </amber>
+    </input-files>
+    <outputs>
+        <directory>./out27</directory>
+        <overwrite-output>True</overwrite-output>
+        <reporting>
+            <energy>
+                <interval>500</interval>
+            </energy>
+            <coordinates>
+                <file-type>dcd</file-type>
+            </coordinates>
+            <statistics>
+                <interval>500</interval>
+            </statistics>
+        </reporting>
+    </outputs>
+</gamd>

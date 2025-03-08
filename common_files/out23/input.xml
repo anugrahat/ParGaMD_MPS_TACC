@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<gamd>
+    <temperature>310.0</temperature>
+    <system>
+        <nonbonded-method>pme</nonbonded-method>
+        <nonbonded-cutoff>1.0</nonbonded-cutoff>
+        <constraints>hbonds</constraints>
+        <switch-distance>1.0</switch-distance>
+        <ewald-error-tolerance>0.0005</ewald-error-tolerance>
+    </system>
+    <run-minimization>True</run-minimization>
+    <integrator>
+        <algorithm>langevin</algorithm>
+        <boost-type>upper-dual</boost-type>
+        <sigma0>
+            <primary>6.0</primary>
+            <secondary>6.0</secondary>
+        </sigma0>
+        <random-seed>0</random-seed>
+        <dt>0.002</dt>
+        <friction-coefficient>1.0</friction-coefficient>
+        <number-of-steps>
+            <conventional-md-prep>1000</conventional-md-prep>
+            <conventional-md>200000</conventional-md>
+            <gamd-equilibration-prep>1000</gamd-equilibration-prep>
+            <gamd-equilibration>50000</gamd-equilibration>
+            <gamd-production>100000</gamd-production>
+            <extension-steps>50000</extension-steps>
+            <averaging-window-interval>100</averaging-window-interval>
+        </number-of-steps>
+    </integrator>
+    <input-files>
+        <amber>
+            <topology>/ocean/projects/chm240001p/thyagatu/pargamd/ParGaMD_chig_2/common_files/chignolin.parm7</topology>
+            <coordinates type="rst7">/ocean/projects/chm240001p/thyagatu/pargamd/ParGaMD_chig_2/common_files/chignolin.rst7</coordinates>
+        </amber>
+    </input-files>
+    <outputs>
+        <directory>./out23</directory>
+        <overwrite-output>True</overwrite-output>
+        <reporting>
+            <energy>
+                <interval>500</interval>
+            </energy>
+            <coordinates>
+                <file-type>dcd</file-type>
+            </coordinates>
+            <statistics>
+                <interval>500</interval>
+            </statistics>
+        </reporting>
+    </outputs>
+</gamd>
