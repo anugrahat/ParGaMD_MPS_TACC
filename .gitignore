@@ -1,0 +1,4 @@
+traj_segs/
+seg_logs/
+*.log
+*.out
