@@ -28,12 +28,12 @@ sed -i 's|<directory>.*</directory>|<directory>.</directory>|' input.xml
 # 4) Handle GaMD checkpoint for first vs. subsequent iteration
 ##############################################################################
 if [ "$WEST_CURRENT_ITER" -eq 1 ]; then
-    rsync -av --progress --checksum  /home/anugraha/openmm_GaMD_anu_psc/ParGaMD_chig_2/common_files/out27/gamd_restart.checkpoint ./gamd_restart.checkpoint
+    rsync -av --progress --checksum  /scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/common_files/out27/gamd_restart.checkpoint ./gamd_restart.checkpoint
     sync
-    python /home/anugraha/openmm_GaMD_anu_psc/ParGaMD_chig_2/common_files/gamdRunner -p CUDA -r xml input.xml
+    python /scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/common_files/gamdRunner -p CUDA -r xml input.xml
 else
     cp -L "$WEST_PARENT_DATA_REF/gamd_restart.checkpoint" ./gamd_restart.checkpoint
-    python /home/anugraha/openmm_GaMD_anu_psc/ParGaMD_chig_2/common_files/gamdRunner -p CUDA -r xml input.xml
+    python /scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/common_files/gamdRunner -p CUDA -r xml input.xml
 fi
 
 

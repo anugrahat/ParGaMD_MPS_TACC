@@ -39,8 +39,8 @@
     
     <input-files>
         <amber>
-            <topology>/home/anugraha/openmm_GaMD_anu_psc/ParGaMD_chig_2/common_files/chignolin.parm7</topology>
-            <coordinates type="rst7">/home/anugraha/openmm_GaMD_anu_psc/ParGaMD_chig_2/common_files/chignolin.rst7</coordinates>
+		<topology>/scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/common_files/chignolin.parm7</topology>
+		<coordinates type="rst7">/scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/common_files/chignolin.rst7</coordinates>
         </amber>
     </input-files>
     <outputs>

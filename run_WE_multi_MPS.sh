@@ -1,11 +1,15 @@
 #!/bin/bash
-#SBATCH --job-name=gamd_run
-#SBATCH --account=ahnlab
-#SBATCH --partition=gpu-ahn
-#SBATCH --nodes=1
-#SBATCH --cpus-per-task=32
-#SBATCH --gres=gpu:2
-#SBATCH --time=120:00:00
+#SBATCH -J mps_gpu_job          # Job name
+#SBATCH -o job.out 
+#SBATCH -e job.err                                # Output filename (%j = job ID)
+#SBATCH -t 01:00:00              # Wall time (1 hour)
+#SBATCH -N 1                     # Number of nodes                    
+#SBATCH --cpus-per-task=32        # CPUs per task             # Request 1 GPU
+#SBATCH -p gh                    # GPU partition (modify if needed)
+#SBATCH -A MCB23037                    # Project/Allocation name
+
+
+
 
 ##############################################################################
 # 0) Basic environment and module loads
@@ -14,8 +18,10 @@ set -x
 cd "$SLURM_SUBMIT_DIR"
 
 source ~/.bashrc
-module load conda3/4.X cuda/11.8.0
-source activate openmm_env
+#module load gcc/14.2.0
+module load cuda/12.6
+conda init
+conda  activate openmm_westpa
 
 export WEST_SIM_ROOT="$SLURM_SUBMIT_DIR"
 cd "$WEST_SIM_ROOT"
@@ -24,19 +30,59 @@ cd "$WEST_SIM_ROOT"
 export OPENMM_CPU_THREADS=2
 export OMP_NUM_THREADS=1
 
-echo "Initially, CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
-nvidia-smi -L
+#echo "Initially, CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
+#nvidia-smi -L
 
 ##############################################################################
 # 1) (Optional) Start MPS
 ##############################################################################
-nvidia-cuda-mps-control -d
-sleep 5
-echo set_active_thread_percentage 40 | nvidia-cuda-mps-control
 
+export CUDA_MPS_PIPE_DIRECTORY=/tmp/nvidia-mps
+export CUDA_MPS_LOG_DIRECTORY=/tmp/nvidia-log
+
+echo "Starting MPS daemon..."
+
+export TACC_TASKS_PER_NODE=1 
+
+ibrun -np $SLURM_NNODES nvidia-cuda-mps-control -d
+unset TACC_TASKS_PER_NODE
+#nvidia-cuda-mps-control -d
+
+sleep 5
+
+
+ibrun -np $SLURM_NNODES bash -c 'ps aux | grep "[n]vidia-cuda-mps-control"'
+echo "set_active_thread_percentage 40" | nvidia-cuda-mps-control
+
+
+#if pgrep -f  "nvidia-cuda-mps-control" > /dev/null; then
+   # echo "set_active_thread_percentage 40" | nvidia-cuda-mps-control
+#else
+   # echo "ERROR: MPS did not start properly!"
+    #exit 1
+#fi
+
+
+#echo set_active_thread_percentage 40 | nvidia-cuda-mps-control
+
+
+
+nvidia-smi -L
+
+echo "CUDA_VISIBLE_DEVICES before setting: $CUDA_VISIBLE_DEVICES"
+
+
+
+if [ -z "$CUDA_VISIBLE_DEVICES" ]; then
+    CUDA_VISIBLE_DEVICES=$(nvidia-smi --query-gpu=index --format=csv,noheader | tr '\n' ',')
+    export CUDA_VISIBLE_DEVICES
+    echo "Manually setting CUDA_VISIBLE_DEVICES: $CUDA_VISIBLE_DEVICES"
+fi
 ##############################################################################
 # 2) Initialize WESTPA
 ##############################################################################
+./init.sh
+echo "init.sh ran"
 source env.sh || exit 1
 export SERVER_INFO="${WEST_SIM_ROOT}/west_zmq_info.json"
 
@@ -87,16 +133,27 @@ QPID=$!
 ##############################################################################
 # 5) Launch GPU workers
 ##############################################################################
-export WORKERS_PER_GPU=12
+export WORKERS_PER_GPU=8
 IFS=',' read -ra DEVICES <<< "$CUDA_VISIBLE_DEVICES"
 total_workers=$(( ${#DEVICES[@]} * WORKERS_PER_GPU ))
+
+echo "Debug: CUDA_VISIBLE_DEVICES = $CUDA_VISIBLE_DEVICES"
 echo "Debug: DEVICES = ${DEVICES[@]}"
 echo "Debug: total_workers = $total_workers"
+
+
+if [ ${#DEVICES[@]} -eq 0 ]; then
+    echo "ERROR: No GPUs detected! Exiting..."
+    exit 1
+fi
+
+
 
 for gpuid in "${DEVICES[@]}"; do
     for ((w=1; w<=WORKERS_PER_GPU; w++)); do
         (
           export CUDA_VISIBLE_DEVICES="$gpuid"
+	  echo "Launching worker $w on GPU $gpuid..."
           w_run --work-manager=zmq \
                 --n-workers=1 \
                 --zmq-mode=client \
@@ -126,3 +183,4 @@ echo "Stopping MPS..."
 echo quit | nvidia-cuda-mps-control
 
 echo "Run complete."
+exit 0 

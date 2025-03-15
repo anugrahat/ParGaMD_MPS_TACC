@@ -1,0 +1,1389 @@
++ cd /scratch/10597/anugrahat/pargamd/ParGaMD_chig_2
++ source /home1/10597/anugrahat/.bashrc
+++ '[' -n '' ']'
+++ '[' -z 1 -a BATCH '!=' BATCH ']'
+++ '[' -n '' ']'
++++ /scratch/10597/anugrahat/miniconda3/bin/conda shell.bash hook
+++ __conda_setup='export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\''
+
+# Copyright (C) 2012 Anaconda, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+__conda_exe() (
+    if [ -n "${_CE_M:+x}" ] && [ -n "${_CE_CONDA:+x}" ]; then
+        # only use _CE_M/_CE_CONDA when defined to avoid issues when run with `set -u`
+        "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+    else
+        "$CONDA_EXE" "$@"
+    fi
+)
+
+__conda_hashr() {
+    if [ -n "${ZSH_VERSION:+x}" ]; then
+        \rehash
+    elif [ -n "${POSH_VERSION:+x}" ]; then
+        :  # pass
+    else
+        \hash -r
+    fi
+}
+
+__conda_activate() {
+    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
+        # after conda updated to >= 4.4. See issue #6173.
+        PS1="$CONDA_PS1_BACKUP"
+        \unset CONDA_PS1_BACKUP
+    fi
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+__conda_reactivate() {
+    # FUTURE: conda 25.9, remove this function
+    echo "'\''__conda_reactivate'\'' is deprecated and will be removed in 25.9. Use '\''__conda_activate reactivate'\'' instead." 1>&2
+    __conda_activate reactivate
+}
+
+conda() {
+    \local cmd="${1-__missing__}"
+    case "$cmd" in
+        activate|deactivate)
+            __conda_activate "$@"
+            ;;
+        install|update|upgrade|remove|uninstall)
+            __conda_exe "$@" || \return
+            __conda_activate reactivate
+            ;;
+        *)
+            __conda_exe "$@"
+            ;;
+    esac
+}
+
+if [ -z "${CONDA_SHLVL+x}" ]; then
+    \export CONDA_SHLVL=0
+    # In dev-mode CONDA_EXE is python.exe and on Windows
+    # it is in a different relative location to condabin.
+    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+    else
+        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+    fi
+    \export PATH
+
+    # We'\''re not allowing PS1 to be unbound. It must at least be set.
+    # However, we'\''re not exporting it, which can cause problems when starting a second shell
+    # via a first shell (i.e. starting zsh from bash).
+    if [ -z "${PS1+x}" ]; then
+        PS1=
+    fi
+fi
+
+conda activate base'
+++ '[' 0 -eq 0 ']'
+++ eval 'export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\''
+
+# Copyright (C) 2012 Anaconda, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+__conda_exe() (
+    if [ -n "${_CE_M:+x}" ] && [ -n "${_CE_CONDA:+x}" ]; then
+        # only use _CE_M/_CE_CONDA when defined to avoid issues when run with `set -u`
+        "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+    else
+        "$CONDA_EXE" "$@"
+    fi
+)
+
+__conda_hashr() {
+    if [ -n "${ZSH_VERSION:+x}" ]; then
+        \rehash
+    elif [ -n "${POSH_VERSION:+x}" ]; then
+        :  # pass
+    else
+        \hash -r
+    fi
+}
+
+__conda_activate() {
+    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
+        # after conda updated to >= 4.4. See issue #6173.
+        PS1="$CONDA_PS1_BACKUP"
+        \unset CONDA_PS1_BACKUP
+    fi
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+__conda_reactivate() {
+    # FUTURE: conda 25.9, remove this function
+    echo "'\''__conda_reactivate'\'' is deprecated and will be removed in 25.9. Use '\''__conda_activate reactivate'\'' instead." 1>&2
+    __conda_activate reactivate
+}
+
+conda() {
+    \local cmd="${1-__missing__}"
+    case "$cmd" in
+        activate|deactivate)
+            __conda_activate "$@"
+            ;;
+        install|update|upgrade|remove|uninstall)
+            __conda_exe "$@" || \return
+            __conda_activate reactivate
+            ;;
+        *)
+            __conda_exe "$@"
+            ;;
+    esac
+}
+
+if [ -z "${CONDA_SHLVL+x}" ]; then
+    \export CONDA_SHLVL=0
+    # In dev-mode CONDA_EXE is python.exe and on Windows
+    # it is in a different relative location to condabin.
+    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+    else
+        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+    fi
+    \export PATH
+
+    # We'\''re not allowing PS1 to be unbound. It must at least be set.
+    # However, we'\''re not exporting it, which can cause problems when starting a second shell
+    # via a first shell (i.e. starting zsh from bash).
+    if [ -z "${PS1+x}" ]; then
+        PS1=
+    fi
+fi
+
+conda activate base'
++++ export CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
++++ CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
++++ '[' -z x ']'
++++ conda activate base
++++ local cmd=activate
++++ case "$cmd" in
++++ __conda_activate activate base
++++ '[' -n '' ']'
++++ local ask_conda
+++++ PS1=
+++++ __conda_exe shell.posix activate base
+++++ '[' -n '' ']'
+++++ /scratch/10597/anugrahat/miniconda3/bin/conda shell.posix activate base
++++ ask_conda='unset _CE_M
+unset _CE_CONDA
+PS1='\''(base) '\''
+export PATH='\''/opt/apps/xalt/xalt/bin:/opt/apps/nvidia24/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/nvidia24/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/nvidia24/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/nvidia24/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/nvidia24/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/extras/qd/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/bin:/scratch/10597/anugrahat/miniconda3/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.'\''
+export CONDA_PREFIX='\''/scratch/10597/anugrahat/miniconda3'\''
+export CONDA_SHLVL='\''3'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_PREFIX_2='\''/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa'\''
+export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\'''
++++ eval 'unset _CE_M
+unset _CE_CONDA
+PS1='\''(base) '\''
+export PATH='\''/opt/apps/xalt/xalt/bin:/opt/apps/nvidia24/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/nvidia24/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/nvidia24/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/nvidia24/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/nvidia24/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/extras/qd/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/bin:/scratch/10597/anugrahat/miniconda3/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.'\''
+export CONDA_PREFIX='\''/scratch/10597/anugrahat/miniconda3'\''
+export CONDA_SHLVL='\''3'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_PREFIX_2='\''/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa'\''
+export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\'''
+++++ unset _CE_M
+++++ unset _CE_CONDA
+++++ PS1='(base) '
+++++ export PATH=/opt/apps/xalt/xalt/bin:/opt/apps/nvidia24/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/nvidia24/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/nvidia24/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/nvidia24/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/nvidia24/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/extras/qd/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/bin:/scratch/10597/anugrahat/miniconda3/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.
+++++ PATH=/opt/apps/xalt/xalt/bin:/opt/apps/nvidia24/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/nvidia24/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/nvidia24/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/nvidia24/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/nvidia24/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/extras/qd/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/bin:/scratch/10597/anugrahat/miniconda3/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.
+++++ export CONDA_PREFIX=/scratch/10597/anugrahat/miniconda3
+++++ CONDA_PREFIX=/scratch/10597/anugrahat/miniconda3
+++++ export CONDA_SHLVL=3
+++++ CONDA_SHLVL=3
+++++ export CONDA_DEFAULT_ENV=base
+++++ CONDA_DEFAULT_ENV=base
+++++ export 'CONDA_PROMPT_MODIFIER=(base) '
+++++ CONDA_PROMPT_MODIFIER='(base) '
+++++ export CONDA_PREFIX_2=/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa
+++++ CONDA_PREFIX_2=/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa
+++++ export CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
+++++ CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
+++++ export CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
+++++ CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
++++ __conda_hashr
++++ '[' -n '' ']'
++++ '[' -n '' ']'
++++ hash -r
+++ unset __conda_setup
++ module load cuda/12.6
++ '[' -z '' ']'
++ case "$-" in
++ __lmod_sh_dbg=x
++ '[' -n x ']'
++ set +x
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) openmpi/5.0.5
+
++ unset __lmod_sh_dbg
++ return 0
++ conda init
++ local cmd=init
++ case "$cmd" in
++ __conda_exe init
++ '[' -n '' ']'
++ /scratch/10597/anugrahat/miniconda3/bin/conda init
++ conda activate openmm_westpa
++ local cmd=activate
++ case "$cmd" in
++ __conda_activate activate openmm_westpa
++ '[' -n '' ']'
++ local ask_conda
+++ PS1='(base) '
+++ __conda_exe shell.posix activate openmm_westpa
+++ '[' -n '' ']'
+++ /scratch/10597/anugrahat/miniconda3/bin/conda shell.posix activate openmm_westpa
++ ask_conda='unset _CE_M
+unset _CE_CONDA
+PS1='\''(openmm_westpa) '\''
+export PATH='\''/opt/apps/xalt/xalt/bin:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/extras/qd/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/bin:/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.'\''
+export CONDA_PREFIX='\''/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa'\''
+export CONDA_SHLVL='\''4'\''
+export CONDA_DEFAULT_ENV='\''openmm_westpa'\''
+export CONDA_PROMPT_MODIFIER='\''(openmm_westpa) '\''
+export CONDA_PREFIX_3='\''/scratch/10597/anugrahat/miniconda3'\''
+export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\'''
++ eval 'unset _CE_M
+unset _CE_CONDA
+PS1='\''(openmm_westpa) '\''
+export PATH='\''/opt/apps/xalt/xalt/bin:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/extras/qd/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/bin:/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.'\''
+export CONDA_PREFIX='\''/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa'\''
+export CONDA_SHLVL='\''4'\''
+export CONDA_DEFAULT_ENV='\''openmm_westpa'\''
+export CONDA_PROMPT_MODIFIER='\''(openmm_westpa) '\''
+export CONDA_PREFIX_3='\''/scratch/10597/anugrahat/miniconda3'\''
+export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\'''
+++ unset _CE_M
+++ unset _CE_CONDA
+++ PS1='(openmm_westpa) '
+++ export PATH=/opt/apps/xalt/xalt/bin:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/extras/qd/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/bin:/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.
+++ PATH=/opt/apps/xalt/xalt/bin:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/extras/qd/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/bin:/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.
+++ export CONDA_PREFIX=/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa
+++ CONDA_PREFIX=/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa
+++ export CONDA_SHLVL=4
+++ CONDA_SHLVL=4
+++ export CONDA_DEFAULT_ENV=openmm_westpa
+++ CONDA_DEFAULT_ENV=openmm_westpa
+++ export 'CONDA_PROMPT_MODIFIER=(openmm_westpa) '
+++ CONDA_PROMPT_MODIFIER='(openmm_westpa) '
+++ export CONDA_PREFIX_3=/scratch/10597/anugrahat/miniconda3
+++ CONDA_PREFIX_3=/scratch/10597/anugrahat/miniconda3
+++ export CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
+++ CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
+++ export CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
+++ CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
++ __conda_hashr
++ '[' -n '' ']'
++ '[' -n '' ']'
++ hash -r
++ export WEST_SIM_ROOT=/scratch/10597/anugrahat/pargamd/ParGaMD_chig_2
++ WEST_SIM_ROOT=/scratch/10597/anugrahat/pargamd/ParGaMD_chig_2
++ cd /scratch/10597/anugrahat/pargamd/ParGaMD_chig_2
++ export OPENMM_CPU_THREADS=2
++ OPENMM_CPU_THREADS=2
++ export OMP_NUM_THREADS=1
++ OMP_NUM_THREADS=1
++ export CUDA_MPS_PIPE_DIRECTORY=/tmp/nvidia-mps
++ CUDA_MPS_PIPE_DIRECTORY=/tmp/nvidia-mps
++ export CUDA_MPS_LOG_DIRECTORY=/tmp/nvidia-log
++ CUDA_MPS_LOG_DIRECTORY=/tmp/nvidia-log
++ echo 'Starting MPS daemon...'
++ export TACC_TASKS_PER_NODE=1
++ TACC_TASKS_PER_NODE=1
++ ibrun -np 1 nvidia-cuda-mps-control -d
++ unset TACC_TASKS_PER_NODE
++ sleep 5
++ ibrun -np 1 bash -c 'ps aux | grep "[n]vidia-cuda-mps-control"'
++ echo 'set_active_thread_percentage 40'
++ nvidia-cuda-mps-control
++ nvidia-smi -L
++ echo 'CUDA_VISIBLE_DEVICES before setting: '
++ '[' -z '' ']'
+++ nvidia-smi --query-gpu=index --format=csv,noheader
+++ tr '\n' ,
++ CUDA_VISIBLE_DEVICES=0,
++ export CUDA_VISIBLE_DEVICES
++ echo 'Manually setting CUDA_VISIBLE_DEVICES: 0,'
++ ./init.sh
++ source /home1/10597/anugrahat/.bashrc
+++ '[' -n '' ']'
+++ '[' -z 1 -a BATCH '!=' BATCH ']'
+++ '[' -n '' ']'
++++ /scratch/10597/anugrahat/miniconda3/bin/conda shell.bash hook
+++ __conda_setup='export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\''
+
+# Copyright (C) 2012 Anaconda, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+__conda_exe() (
+    if [ -n "${_CE_M:+x}" ] && [ -n "${_CE_CONDA:+x}" ]; then
+        # only use _CE_M/_CE_CONDA when defined to avoid issues when run with `set -u`
+        "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+    else
+        "$CONDA_EXE" "$@"
+    fi
+)
+
+__conda_hashr() {
+    if [ -n "${ZSH_VERSION:+x}" ]; then
+        \rehash
+    elif [ -n "${POSH_VERSION:+x}" ]; then
+        :  # pass
+    else
+        \hash -r
+    fi
+}
+
+__conda_activate() {
+    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
+        # after conda updated to >= 4.4. See issue #6173.
+        PS1="$CONDA_PS1_BACKUP"
+        \unset CONDA_PS1_BACKUP
+    fi
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+__conda_reactivate() {
+    # FUTURE: conda 25.9, remove this function
+    echo "'\''__conda_reactivate'\'' is deprecated and will be removed in 25.9. Use '\''__conda_activate reactivate'\'' instead." 1>&2
+    __conda_activate reactivate
+}
+
+conda() {
+    \local cmd="${1-__missing__}"
+    case "$cmd" in
+        activate|deactivate)
+            __conda_activate "$@"
+            ;;
+        install|update|upgrade|remove|uninstall)
+            __conda_exe "$@" || \return
+            __conda_activate reactivate
+            ;;
+        *)
+            __conda_exe "$@"
+            ;;
+    esac
+}
+
+if [ -z "${CONDA_SHLVL+x}" ]; then
+    \export CONDA_SHLVL=0
+    # In dev-mode CONDA_EXE is python.exe and on Windows
+    # it is in a different relative location to condabin.
+    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+    else
+        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+    fi
+    \export PATH
+
+    # We'\''re not allowing PS1 to be unbound. It must at least be set.
+    # However, we'\''re not exporting it, which can cause problems when starting a second shell
+    # via a first shell (i.e. starting zsh from bash).
+    if [ -z "${PS1+x}" ]; then
+        PS1=
+    fi
+fi
+
+conda activate base'
+++ '[' 0 -eq 0 ']'
+++ eval 'export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\''
+
+# Copyright (C) 2012 Anaconda, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+__conda_exe() (
+    if [ -n "${_CE_M:+x}" ] && [ -n "${_CE_CONDA:+x}" ]; then
+        # only use _CE_M/_CE_CONDA when defined to avoid issues when run with `set -u`
+        "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+    else
+        "$CONDA_EXE" "$@"
+    fi
+)
+
+__conda_hashr() {
+    if [ -n "${ZSH_VERSION:+x}" ]; then
+        \rehash
+    elif [ -n "${POSH_VERSION:+x}" ]; then
+        :  # pass
+    else
+        \hash -r
+    fi
+}
+
+__conda_activate() {
+    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
+        # after conda updated to >= 4.4. See issue #6173.
+        PS1="$CONDA_PS1_BACKUP"
+        \unset CONDA_PS1_BACKUP
+    fi
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+__conda_reactivate() {
+    # FUTURE: conda 25.9, remove this function
+    echo "'\''__conda_reactivate'\'' is deprecated and will be removed in 25.9. Use '\''__conda_activate reactivate'\'' instead." 1>&2
+    __conda_activate reactivate
+}
+
+conda() {
+    \local cmd="${1-__missing__}"
+    case "$cmd" in
+        activate|deactivate)
+            __conda_activate "$@"
+            ;;
+        install|update|upgrade|remove|uninstall)
+            __conda_exe "$@" || \return
+            __conda_activate reactivate
+            ;;
+        *)
+            __conda_exe "$@"
+            ;;
+    esac
+}
+
+if [ -z "${CONDA_SHLVL+x}" ]; then
+    \export CONDA_SHLVL=0
+    # In dev-mode CONDA_EXE is python.exe and on Windows
+    # it is in a different relative location to condabin.
+    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+    else
+        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+    fi
+    \export PATH
+
+    # We'\''re not allowing PS1 to be unbound. It must at least be set.
+    # However, we'\''re not exporting it, which can cause problems when starting a second shell
+    # via a first shell (i.e. starting zsh from bash).
+    if [ -z "${PS1+x}" ]; then
+        PS1=
+    fi
+fi
+
+conda activate base'
++++ export CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
++++ CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
++++ '[' -z x ']'
++++ conda activate base
++++ local cmd=activate
++++ case "$cmd" in
++++ __conda_activate activate base
++++ '[' -n '' ']'
++++ local ask_conda
+++++ PS1=
+++++ __conda_exe shell.posix activate base
+++++ '[' -n '' ']'
+++++ /scratch/10597/anugrahat/miniconda3/bin/conda shell.posix activate base
++++ ask_conda='unset _CE_M
+unset _CE_CONDA
+PS1='\''(base) '\''
+export PATH='\''/opt/apps/xalt/xalt/bin:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/extras/qd/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/bin:/scratch/10597/anugrahat/miniconda3/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.'\''
+export CONDA_PREFIX='\''/scratch/10597/anugrahat/miniconda3'\''
+export CONDA_SHLVL='\''5'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_PREFIX_4='\''/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa'\''
+export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\'''
++++ eval 'unset _CE_M
+unset _CE_CONDA
+PS1='\''(base) '\''
+export PATH='\''/opt/apps/xalt/xalt/bin:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/extras/qd/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/bin:/scratch/10597/anugrahat/miniconda3/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.'\''
+export CONDA_PREFIX='\''/scratch/10597/anugrahat/miniconda3'\''
+export CONDA_SHLVL='\''5'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_PREFIX_4='\''/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa'\''
+export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\'''
+++++ unset _CE_M
+++++ unset _CE_CONDA
+++++ PS1='(base) '
+++++ export PATH=/opt/apps/xalt/xalt/bin:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/extras/qd/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/bin:/scratch/10597/anugrahat/miniconda3/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.
+++++ PATH=/opt/apps/xalt/xalt/bin:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/extras/qd/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/bin:/scratch/10597/anugrahat/miniconda3/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.
+++++ export CONDA_PREFIX=/scratch/10597/anugrahat/miniconda3
+++++ CONDA_PREFIX=/scratch/10597/anugrahat/miniconda3
+++++ export CONDA_SHLVL=5
+++++ CONDA_SHLVL=5
+++++ export CONDA_DEFAULT_ENV=base
+++++ CONDA_DEFAULT_ENV=base
+++++ export 'CONDA_PROMPT_MODIFIER=(base) '
+++++ CONDA_PROMPT_MODIFIER='(base) '
+++++ export CONDA_PREFIX_4=/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa
+++++ CONDA_PREFIX_4=/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa
+++++ export CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
+++++ CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
+++++ export CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
+++++ CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
++++ __conda_hashr
++++ '[' -n '' ']'
++++ '[' -n '' ']'
++++ hash -r
+++ unset __conda_setup
++ module load gcc/14.2.0
++ '[' -z '' ']'
++ case "$-" in
++ __lmod_sh_dbg=x
++ '[' -n x ']'
++ set +x
+
+Lmod is automatically replacing "nvidia/24.7" with "gcc/14.2.0".
+
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) cuda/12.6     2) openmpi/5.0.5
+
++ unset __lmod_sh_dbg
++ return 0
++ module load cuda/12.6
++ '[' -z '' ']'
++ case "$-" in
++ __lmod_sh_dbg=x
++ '[' -n x ']'
++ set +x
++ unset __lmod_sh_dbg
++ return 0
++ conda init
++ local cmd=init
++ case "$cmd" in
++ __conda_exe init
++ '[' -n '' ']'
++ /scratch/10597/anugrahat/miniconda3/bin/conda init
++ conda activate openmm_westpa
++ local cmd=activate
++ case "$cmd" in
++ __conda_activate activate openmm_westpa
++ '[' -n '' ']'
++ local ask_conda
+++ PS1='(base) '
+++ __conda_exe shell.posix activate openmm_westpa
+++ '[' -n '' ']'
+++ /scratch/10597/anugrahat/miniconda3/bin/conda shell.posix activate openmm_westpa
++ ask_conda='unset _CE_M
+unset _CE_CONDA
+PS1='\''(openmm_westpa) '\''
+export PATH='\''/opt/apps/xalt/xalt/bin:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/gcc14/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/opt/apps/gcc/14.2.0/bin:/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.'\''
+export CONDA_PREFIX='\''/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa'\''
+export CONDA_SHLVL='\''6'\''
+export CONDA_DEFAULT_ENV='\''openmm_westpa'\''
+export CONDA_PROMPT_MODIFIER='\''(openmm_westpa) '\''
+export CONDA_PREFIX_5='\''/scratch/10597/anugrahat/miniconda3'\''
+export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\'''
++ eval 'unset _CE_M
+unset _CE_CONDA
+PS1='\''(openmm_westpa) '\''
+export PATH='\''/opt/apps/xalt/xalt/bin:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/gcc14/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/opt/apps/gcc/14.2.0/bin:/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.'\''
+export CONDA_PREFIX='\''/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa'\''
+export CONDA_SHLVL='\''6'\''
+export CONDA_DEFAULT_ENV='\''openmm_westpa'\''
+export CONDA_PROMPT_MODIFIER='\''(openmm_westpa) '\''
+export CONDA_PREFIX_5='\''/scratch/10597/anugrahat/miniconda3'\''
+export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\'''
+++ unset _CE_M
+++ unset _CE_CONDA
+++ PS1='(openmm_westpa) '
+++ export PATH=/opt/apps/xalt/xalt/bin:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/gcc14/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/opt/apps/gcc/14.2.0/bin:/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.
+++ PATH=/opt/apps/xalt/xalt/bin:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/gcc14/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/opt/apps/gcc/14.2.0/bin:/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.
+++ export CONDA_PREFIX=/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa
+++ CONDA_PREFIX=/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa
+++ export CONDA_SHLVL=6
+++ CONDA_SHLVL=6
+++ export CONDA_DEFAULT_ENV=openmm_westpa
+++ CONDA_DEFAULT_ENV=openmm_westpa
+++ export 'CONDA_PROMPT_MODIFIER=(openmm_westpa) '
+++ CONDA_PROMPT_MODIFIER='(openmm_westpa) '
+++ export CONDA_PREFIX_5=/scratch/10597/anugrahat/miniconda3
+++ CONDA_PREFIX_5=/scratch/10597/anugrahat/miniconda3
+++ export CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
+++ CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
+++ export CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
+++ CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
++ __conda_hashr
++ '[' -n '' ']'
++ '[' -n '' ']'
++ hash -r
++ source env.sh
+++ source /home1/10597/anugrahat/.bashrc
++++ '[' -n '' ']'
++++ '[' -z 1 -a BATCH '!=' BATCH ']'
++++ '[' -n '' ']'
+++++ /scratch/10597/anugrahat/miniconda3/bin/conda shell.bash hook
++++ __conda_setup='export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\''
+
+# Copyright (C) 2012 Anaconda, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+__conda_exe() (
+    if [ -n "${_CE_M:+x}" ] && [ -n "${_CE_CONDA:+x}" ]; then
+        # only use _CE_M/_CE_CONDA when defined to avoid issues when run with `set -u`
+        "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+    else
+        "$CONDA_EXE" "$@"
+    fi
+)
+
+__conda_hashr() {
+    if [ -n "${ZSH_VERSION:+x}" ]; then
+        \rehash
+    elif [ -n "${POSH_VERSION:+x}" ]; then
+        :  # pass
+    else
+        \hash -r
+    fi
+}
+
+__conda_activate() {
+    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
+        # after conda updated to >= 4.4. See issue #6173.
+        PS1="$CONDA_PS1_BACKUP"
+        \unset CONDA_PS1_BACKUP
+    fi
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+__conda_reactivate() {
+    # FUTURE: conda 25.9, remove this function
+    echo "'\''__conda_reactivate'\'' is deprecated and will be removed in 25.9. Use '\''__conda_activate reactivate'\'' instead." 1>&2
+    __conda_activate reactivate
+}
+
+conda() {
+    \local cmd="${1-__missing__}"
+    case "$cmd" in
+        activate|deactivate)
+            __conda_activate "$@"
+            ;;
+        install|update|upgrade|remove|uninstall)
+            __conda_exe "$@" || \return
+            __conda_activate reactivate
+            ;;
+        *)
+            __conda_exe "$@"
+            ;;
+    esac
+}
+
+if [ -z "${CONDA_SHLVL+x}" ]; then
+    \export CONDA_SHLVL=0
+    # In dev-mode CONDA_EXE is python.exe and on Windows
+    # it is in a different relative location to condabin.
+    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+    else
+        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+    fi
+    \export PATH
+
+    # We'\''re not allowing PS1 to be unbound. It must at least be set.
+    # However, we'\''re not exporting it, which can cause problems when starting a second shell
+    # via a first shell (i.e. starting zsh from bash).
+    if [ -z "${PS1+x}" ]; then
+        PS1=
+    fi
+fi
+
+conda activate base'
++++ '[' 0 -eq 0 ']'
++++ eval 'export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\''
+
+# Copyright (C) 2012 Anaconda, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+__conda_exe() (
+    if [ -n "${_CE_M:+x}" ] && [ -n "${_CE_CONDA:+x}" ]; then
+        # only use _CE_M/_CE_CONDA when defined to avoid issues when run with `set -u`
+        "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+    else
+        "$CONDA_EXE" "$@"
+    fi
+)
+
+__conda_hashr() {
+    if [ -n "${ZSH_VERSION:+x}" ]; then
+        \rehash
+    elif [ -n "${POSH_VERSION:+x}" ]; then
+        :  # pass
+    else
+        \hash -r
+    fi
+}
+
+__conda_activate() {
+    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
+        # after conda updated to >= 4.4. See issue #6173.
+        PS1="$CONDA_PS1_BACKUP"
+        \unset CONDA_PS1_BACKUP
+    fi
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+__conda_reactivate() {
+    # FUTURE: conda 25.9, remove this function
+    echo "'\''__conda_reactivate'\'' is deprecated and will be removed in 25.9. Use '\''__conda_activate reactivate'\'' instead." 1>&2
+    __conda_activate reactivate
+}
+
+conda() {
+    \local cmd="${1-__missing__}"
+    case "$cmd" in
+        activate|deactivate)
+            __conda_activate "$@"
+            ;;
+        install|update|upgrade|remove|uninstall)
+            __conda_exe "$@" || \return
+            __conda_activate reactivate
+            ;;
+        *)
+            __conda_exe "$@"
+            ;;
+    esac
+}
+
+if [ -z "${CONDA_SHLVL+x}" ]; then
+    \export CONDA_SHLVL=0
+    # In dev-mode CONDA_EXE is python.exe and on Windows
+    # it is in a different relative location to condabin.
+    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+    else
+        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+    fi
+    \export PATH
+
+    # We'\''re not allowing PS1 to be unbound. It must at least be set.
+    # However, we'\''re not exporting it, which can cause problems when starting a second shell
+    # via a first shell (i.e. starting zsh from bash).
+    if [ -z "${PS1+x}" ]; then
+        PS1=
+    fi
+fi
+
+conda activate base'
+++++ export CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
+++++ CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
+++++ export _CE_M=
+++++ _CE_M=
+++++ export _CE_CONDA=
+++++ _CE_CONDA=
+++++ export CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
+++++ CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
+++++ '[' -z x ']'
+++++ conda activate base
+++++ local cmd=activate
+++++ case "$cmd" in
+++++ __conda_activate activate base
+++++ '[' -n '' ']'
+++++ local ask_conda
++++++ PS1='(openmm_westpa) '
++++++ __conda_exe shell.posix activate base
++++++ '[' -n '' ']'
++++++ /scratch/10597/anugrahat/miniconda3/bin/conda shell.posix activate base
+++++ ask_conda='unset _CE_M
+unset _CE_CONDA
+PS1='\''(base) '\''
+export PATH='\''/opt/apps/xalt/xalt/bin:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/gcc14/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/opt/apps/gcc/14.2.0/bin:/scratch/10597/anugrahat/miniconda3/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.'\''
+export CONDA_PREFIX='\''/scratch/10597/anugrahat/miniconda3'\''
+export CONDA_SHLVL='\''7'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_PREFIX_6='\''/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa'\''
+export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\'''
+++++ eval 'unset _CE_M
+unset _CE_CONDA
+PS1='\''(base) '\''
+export PATH='\''/opt/apps/xalt/xalt/bin:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/gcc14/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/opt/apps/gcc/14.2.0/bin:/scratch/10597/anugrahat/miniconda3/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.'\''
+export CONDA_PREFIX='\''/scratch/10597/anugrahat/miniconda3'\''
+export CONDA_SHLVL='\''7'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_PREFIX_6='\''/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa'\''
+export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\'''
++++++ unset _CE_M
++++++ unset _CE_CONDA
++++++ PS1='(base) '
++++++ export PATH=/opt/apps/xalt/xalt/bin:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/gcc14/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/opt/apps/gcc/14.2.0/bin:/scratch/10597/anugrahat/miniconda3/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.
++++++ PATH=/opt/apps/xalt/xalt/bin:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/gcc14/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/opt/apps/gcc/14.2.0/bin:/scratch/10597/anugrahat/miniconda3/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.
++++++ export CONDA_PREFIX=/scratch/10597/anugrahat/miniconda3
++++++ CONDA_PREFIX=/scratch/10597/anugrahat/miniconda3
++++++ export CONDA_SHLVL=7
++++++ CONDA_SHLVL=7
++++++ export CONDA_DEFAULT_ENV=base
++++++ CONDA_DEFAULT_ENV=base
++++++ export 'CONDA_PROMPT_MODIFIER=(base) '
++++++ CONDA_PROMPT_MODIFIER='(base) '
++++++ export CONDA_PREFIX_6=/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa
++++++ CONDA_PREFIX_6=/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa
++++++ export CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
++++++ CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
++++++ export CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
++++++ CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
+++++ __conda_hashr
+++++ '[' -n '' ']'
+++++ '[' -n '' ']'
+++++ hash -r
++++ unset __conda_setup
+++ module load gcc/14.2.0
+++ '[' -z '' ']'
+++ case "$-" in
+++ __lmod_sh_dbg=x
+++ '[' -n x ']'
+++ set +x
+++ unset __lmod_sh_dbg
+++ return 0
+++ module load cuda/12.6
+++ '[' -z '' ']'
+++ case "$-" in
+++ __lmod_sh_dbg=x
+++ '[' -n x ']'
+++ set +x
+++ unset __lmod_sh_dbg
+++ return 0
+++ conda activate openmm_westpa
+++ local cmd=activate
+++ case "$cmd" in
+++ __conda_activate activate openmm_westpa
+++ '[' -n '' ']'
+++ local ask_conda
++++ PS1='(base) '
++++ __conda_exe shell.posix activate openmm_westpa
++++ '[' -n '' ']'
++++ /scratch/10597/anugrahat/miniconda3/bin/conda shell.posix activate openmm_westpa
+++ ask_conda='unset _CE_M
+unset _CE_CONDA
+PS1='\''(openmm_westpa) '\''
+export PATH='\''/opt/apps/xalt/xalt/bin:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/gcc14/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/opt/apps/gcc/14.2.0/bin:/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.'\''
+export CONDA_PREFIX='\''/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa'\''
+export CONDA_SHLVL='\''8'\''
+export CONDA_DEFAULT_ENV='\''openmm_westpa'\''
+export CONDA_PROMPT_MODIFIER='\''(openmm_westpa) '\''
+export CONDA_PREFIX_7='\''/scratch/10597/anugrahat/miniconda3'\''
+export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\'''
+++ eval 'unset _CE_M
+unset _CE_CONDA
+PS1='\''(openmm_westpa) '\''
+export PATH='\''/opt/apps/xalt/xalt/bin:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/gcc14/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/opt/apps/gcc/14.2.0/bin:/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.'\''
+export CONDA_PREFIX='\''/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa'\''
+export CONDA_SHLVL='\''8'\''
+export CONDA_DEFAULT_ENV='\''openmm_westpa'\''
+export CONDA_PROMPT_MODIFIER='\''(openmm_westpa) '\''
+export CONDA_PREFIX_7='\''/scratch/10597/anugrahat/miniconda3'\''
+export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\'''
++++ unset _CE_M
++++ unset _CE_CONDA
++++ PS1='(openmm_westpa) '
++++ export PATH=/opt/apps/xalt/xalt/bin:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/gcc14/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/opt/apps/gcc/14.2.0/bin:/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.
++++ PATH=/opt/apps/xalt/xalt/bin:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/gcc14/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/opt/apps/gcc/14.2.0/bin:/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.
++++ export CONDA_PREFIX=/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa
++++ CONDA_PREFIX=/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa
++++ export CONDA_SHLVL=8
++++ CONDA_SHLVL=8
++++ export CONDA_DEFAULT_ENV=openmm_westpa
++++ CONDA_DEFAULT_ENV=openmm_westpa
++++ export 'CONDA_PROMPT_MODIFIER=(openmm_westpa) '
++++ CONDA_PROMPT_MODIFIER='(openmm_westpa) '
++++ export CONDA_PREFIX_7=/scratch/10597/anugrahat/miniconda3
++++ CONDA_PREFIX_7=/scratch/10597/anugrahat/miniconda3
++++ export CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
++++ CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
++++ export CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
+++ __conda_hashr
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ hash -r
+++ [[ -z /scratch/10597/anugrahat/pargamd/ParGaMD_chig_2 ]]
++++ basename /scratch/10597/anugrahat/pargamd/ParGaMD_chig_2
+++ export SIM_NAME=ParGaMD_chig_2
+++ SIM_NAME=ParGaMD_chig_2
+++ echo 'simulation ParGaMD_chig_2 root is /scratch/10597/anugrahat/pargamd/ParGaMD_chig_2'
+++ export USE_LOCAL_SCRATCH=1
+++ USE_LOCAL_SCRATCH=1
+++ export WM_ZMQ_MASTER_HEARTBEAT=100
+++ WM_ZMQ_MASTER_HEARTBEAT=100
+++ export WM_ZMQ_WORKER_HEARTBEAT=100
+++ WM_ZMQ_WORKER_HEARTBEAT=100
+++ export WM_ZMQ_TIMEOUT_FACTOR=300
+++ WM_ZMQ_TIMEOUT_FACTOR=300
++ rm -rf traj_segs seg_logs istates west.h5
++ mkdir seg_logs traj_segs istates
++ BSTATE_ARGS='--bstate-file /scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/bstates/bstates.txt'
++ w_init --bstate-file /scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/bstates/bstates.txt --segs-per-state 5 --work-manager=threads
++ echo 'init.sh ran'
++ source env.sh
+++ source /home1/10597/anugrahat/.bashrc
++++ '[' -n '' ']'
++++ '[' -z 1 -a BATCH '!=' BATCH ']'
++++ '[' -n '' ']'
+++++ /scratch/10597/anugrahat/miniconda3/bin/conda shell.bash hook
++++ __conda_setup='export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\''
+
+# Copyright (C) 2012 Anaconda, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+__conda_exe() (
+    if [ -n "${_CE_M:+x}" ] && [ -n "${_CE_CONDA:+x}" ]; then
+        # only use _CE_M/_CE_CONDA when defined to avoid issues when run with `set -u`
+        "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+    else
+        "$CONDA_EXE" "$@"
+    fi
+)
+
+__conda_hashr() {
+    if [ -n "${ZSH_VERSION:+x}" ]; then
+        \rehash
+    elif [ -n "${POSH_VERSION:+x}" ]; then
+        :  # pass
+    else
+        \hash -r
+    fi
+}
+
+__conda_activate() {
+    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
+        # after conda updated to >= 4.4. See issue #6173.
+        PS1="$CONDA_PS1_BACKUP"
+        \unset CONDA_PS1_BACKUP
+    fi
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+__conda_reactivate() {
+    # FUTURE: conda 25.9, remove this function
+    echo "'\''__conda_reactivate'\'' is deprecated and will be removed in 25.9. Use '\''__conda_activate reactivate'\'' instead." 1>&2
+    __conda_activate reactivate
+}
+
+conda() {
+    \local cmd="${1-__missing__}"
+    case "$cmd" in
+        activate|deactivate)
+            __conda_activate "$@"
+            ;;
+        install|update|upgrade|remove|uninstall)
+            __conda_exe "$@" || \return
+            __conda_activate reactivate
+            ;;
+        *)
+            __conda_exe "$@"
+            ;;
+    esac
+}
+
+if [ -z "${CONDA_SHLVL+x}" ]; then
+    \export CONDA_SHLVL=0
+    # In dev-mode CONDA_EXE is python.exe and on Windows
+    # it is in a different relative location to condabin.
+    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+    else
+        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+    fi
+    \export PATH
+
+    # We'\''re not allowing PS1 to be unbound. It must at least be set.
+    # However, we'\''re not exporting it, which can cause problems when starting a second shell
+    # via a first shell (i.e. starting zsh from bash).
+    if [ -z "${PS1+x}" ]; then
+        PS1=
+    fi
+fi
+
+conda activate base'
++++ '[' 0 -eq 0 ']'
++++ eval 'export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\''
+
+# Copyright (C) 2012 Anaconda, Inc
+# SPDX-License-Identifier: BSD-3-Clause
+__conda_exe() (
+    if [ -n "${_CE_M:+x}" ] && [ -n "${_CE_CONDA:+x}" ]; then
+        # only use _CE_M/_CE_CONDA when defined to avoid issues when run with `set -u`
+        "$CONDA_EXE" $_CE_M $_CE_CONDA "$@"
+    else
+        "$CONDA_EXE" "$@"
+    fi
+)
+
+__conda_hashr() {
+    if [ -n "${ZSH_VERSION:+x}" ]; then
+        \rehash
+    elif [ -n "${POSH_VERSION:+x}" ]; then
+        :  # pass
+    else
+        \hash -r
+    fi
+}
+
+__conda_activate() {
+    if [ -n "${CONDA_PS1_BACKUP:+x}" ]; then
+        # Handle transition from shell activated with conda <= 4.3 to a subsequent activation
+        # after conda updated to >= 4.4. See issue #6173.
+        PS1="$CONDA_PS1_BACKUP"
+        \unset CONDA_PS1_BACKUP
+    fi
+    \local ask_conda
+    ask_conda="$(PS1="${PS1:-}" __conda_exe shell.posix "$@")" || \return
+    \eval "$ask_conda"
+    __conda_hashr
+}
+
+__conda_reactivate() {
+    # FUTURE: conda 25.9, remove this function
+    echo "'\''__conda_reactivate'\'' is deprecated and will be removed in 25.9. Use '\''__conda_activate reactivate'\'' instead." 1>&2
+    __conda_activate reactivate
+}
+
+conda() {
+    \local cmd="${1-__missing__}"
+    case "$cmd" in
+        activate|deactivate)
+            __conda_activate "$@"
+            ;;
+        install|update|upgrade|remove|uninstall)
+            __conda_exe "$@" || \return
+            __conda_activate reactivate
+            ;;
+        *)
+            __conda_exe "$@"
+            ;;
+    esac
+}
+
+if [ -z "${CONDA_SHLVL+x}" ]; then
+    \export CONDA_SHLVL=0
+    # In dev-mode CONDA_EXE is python.exe and on Windows
+    # it is in a different relative location to condabin.
+    if [ -n "${_CE_CONDA:+x}" ] && [ -n "${WINDIR+x}" ]; then
+        PATH="$(\dirname "$CONDA_EXE")/condabin${PATH:+":${PATH}"}"
+    else
+        PATH="$(\dirname "$(\dirname "$CONDA_EXE")")/condabin${PATH:+":${PATH}"}"
+    fi
+    \export PATH
+
+    # We'\''re not allowing PS1 to be unbound. It must at least be set.
+    # However, we'\''re not exporting it, which can cause problems when starting a second shell
+    # via a first shell (i.e. starting zsh from bash).
+    if [ -z "${PS1+x}" ]; then
+        PS1=
+    fi
+fi
+
+conda activate base'
+++++ export CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
+++++ CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
+++++ export _CE_M=
+++++ _CE_M=
+++++ export _CE_CONDA=
+++++ _CE_CONDA=
+++++ export CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
+++++ CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
+++++ '[' -z x ']'
+++++ conda activate base
+++++ local cmd=activate
+++++ case "$cmd" in
+++++ __conda_activate activate base
+++++ '[' -n '' ']'
+++++ local ask_conda
++++++ PS1='(openmm_westpa) '
++++++ __conda_exe shell.posix activate base
++++++ '[' -n '' ']'
++++++ /scratch/10597/anugrahat/miniconda3/bin/conda shell.posix activate base
+++++ ask_conda='unset _CE_M
+unset _CE_CONDA
+PS1='\''(base) '\''
+export PATH='\''/opt/apps/xalt/xalt/bin:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/extras/qd/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/bin:/scratch/10597/anugrahat/miniconda3/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.'\''
+export CONDA_PREFIX='\''/scratch/10597/anugrahat/miniconda3'\''
+export CONDA_SHLVL='\''5'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_PREFIX_4='\''/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa'\''
+export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\'''
+++++ eval 'unset _CE_M
+unset _CE_CONDA
+PS1='\''(base) '\''
+export PATH='\''/opt/apps/xalt/xalt/bin:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/extras/qd/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/bin:/scratch/10597/anugrahat/miniconda3/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.'\''
+export CONDA_PREFIX='\''/scratch/10597/anugrahat/miniconda3'\''
+export CONDA_SHLVL='\''5'\''
+export CONDA_DEFAULT_ENV='\''base'\''
+export CONDA_PROMPT_MODIFIER='\''(base) '\''
+export CONDA_PREFIX_4='\''/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa'\''
+export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\'''
++++++ unset _CE_M
++++++ unset _CE_CONDA
++++++ PS1='(base) '
++++++ export PATH=/opt/apps/xalt/xalt/bin:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/extras/qd/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/bin:/scratch/10597/anugrahat/miniconda3/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.
++++++ PATH=/opt/apps/xalt/xalt/bin:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/nvidia24/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/extras/qd/bin:/home1/apps/nvidia/Linux_aarch64/24.7/compilers/bin:/scratch/10597/anugrahat/miniconda3/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.
++++++ export CONDA_PREFIX=/scratch/10597/anugrahat/miniconda3
++++++ CONDA_PREFIX=/scratch/10597/anugrahat/miniconda3
++++++ export CONDA_SHLVL=5
++++++ CONDA_SHLVL=5
++++++ export CONDA_DEFAULT_ENV=base
++++++ CONDA_DEFAULT_ENV=base
++++++ export 'CONDA_PROMPT_MODIFIER=(base) '
++++++ CONDA_PROMPT_MODIFIER='(base) '
++++++ export CONDA_PREFIX_4=/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa
++++++ CONDA_PREFIX_4=/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa
++++++ export CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
++++++ CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
++++++ export CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
++++++ CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
+++++ __conda_hashr
+++++ '[' -n '' ']'
+++++ '[' -n '' ']'
+++++ hash -r
++++ unset __conda_setup
+++ module load gcc/14.2.0
+++ '[' -z '' ']'
+++ case "$-" in
+++ __lmod_sh_dbg=x
+++ '[' -n x ']'
+++ set +x
+
+Lmod is automatically replacing "nvidia/24.7" with "gcc/14.2.0".
+
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) cuda/12.6     2) openmpi/5.0.5
+
+++ unset __lmod_sh_dbg
+++ return 0
+++ module load cuda/12.6
+++ '[' -z '' ']'
+++ case "$-" in
+++ __lmod_sh_dbg=x
+++ '[' -n x ']'
+++ set +x
+++ unset __lmod_sh_dbg
+++ return 0
+++ conda activate openmm_westpa
+++ local cmd=activate
+++ case "$cmd" in
+++ __conda_activate activate openmm_westpa
+++ '[' -n '' ']'
+++ local ask_conda
++++ PS1='(base) '
++++ __conda_exe shell.posix activate openmm_westpa
++++ '[' -n '' ']'
++++ /scratch/10597/anugrahat/miniconda3/bin/conda shell.posix activate openmm_westpa
+++ ask_conda='unset _CE_M
+unset _CE_CONDA
+PS1='\''(openmm_westpa) '\''
+export PATH='\''/opt/apps/xalt/xalt/bin:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/gcc14/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/opt/apps/gcc/14.2.0/bin:/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.'\''
+export CONDA_PREFIX='\''/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa'\''
+export CONDA_SHLVL='\''6'\''
+export CONDA_DEFAULT_ENV='\''openmm_westpa'\''
+export CONDA_PROMPT_MODIFIER='\''(openmm_westpa) '\''
+export CONDA_PREFIX_5='\''/scratch/10597/anugrahat/miniconda3'\''
+export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\'''
+++ eval 'unset _CE_M
+unset _CE_CONDA
+PS1='\''(openmm_westpa) '\''
+export PATH='\''/opt/apps/xalt/xalt/bin:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/gcc14/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/opt/apps/gcc/14.2.0/bin:/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.'\''
+export CONDA_PREFIX='\''/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa'\''
+export CONDA_SHLVL='\''6'\''
+export CONDA_DEFAULT_ENV='\''openmm_westpa'\''
+export CONDA_PROMPT_MODIFIER='\''(openmm_westpa) '\''
+export CONDA_PREFIX_5='\''/scratch/10597/anugrahat/miniconda3'\''
+export CONDA_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/scratch/10597/anugrahat/miniconda3/bin/python'\'''
++++ unset _CE_M
++++ unset _CE_CONDA
++++ PS1='(openmm_westpa) '
++++ export PATH=/opt/apps/xalt/xalt/bin:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/gcc14/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/opt/apps/gcc/14.2.0/bin:/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.
++++ PATH=/opt/apps/xalt/xalt/bin:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/one-sided:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/collective:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/pt2pt:/opt/apps/gcc14/cuda12/openmpi/5.0.5/libexec/osu-micro-benchmarks/mpi/startup:/opt/apps/gcc14/cuda12/openmpi/5.0.5/bin:/home1/apps/nvidia/Linux_aarch64/24.9/cuda/12.6/bin:/opt/apps/gcc/14.2.0/bin:/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa/bin:/scratch/10597/anugrahat/miniconda3/condabin:/home1/apps/cmake/3.31.5/bin:/opt/apps/ucx/1.17.0/bin:/opt/apps/ucc/1.3.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:.
++++ export CONDA_PREFIX=/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa
++++ CONDA_PREFIX=/scratch/10597/anugrahat/miniconda3/envs/openmm_westpa
++++ export CONDA_SHLVL=6
++++ CONDA_SHLVL=6
++++ export CONDA_DEFAULT_ENV=openmm_westpa
++++ CONDA_DEFAULT_ENV=openmm_westpa
++++ export 'CONDA_PROMPT_MODIFIER=(openmm_westpa) '
++++ CONDA_PROMPT_MODIFIER='(openmm_westpa) '
++++ export CONDA_PREFIX_5=/scratch/10597/anugrahat/miniconda3
++++ CONDA_PREFIX_5=/scratch/10597/anugrahat/miniconda3
++++ export CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
++++ CONDA_EXE=/scratch/10597/anugrahat/miniconda3/bin/conda
++++ export CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/scratch/10597/anugrahat/miniconda3/bin/python
+++ __conda_hashr
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ hash -r
+++ [[ -z /scratch/10597/anugrahat/pargamd/ParGaMD_chig_2 ]]
++++ basename /scratch/10597/anugrahat/pargamd/ParGaMD_chig_2
+++ export SIM_NAME=ParGaMD_chig_2
+++ SIM_NAME=ParGaMD_chig_2
+++ echo 'simulation ParGaMD_chig_2 root is /scratch/10597/anugrahat/pargamd/ParGaMD_chig_2'
+++ export USE_LOCAL_SCRATCH=1
+++ USE_LOCAL_SCRATCH=1
+++ export WM_ZMQ_MASTER_HEARTBEAT=100
+++ WM_ZMQ_MASTER_HEARTBEAT=100
+++ export WM_ZMQ_WORKER_HEARTBEAT=100
+++ WM_ZMQ_WORKER_HEARTBEAT=100
+++ export WM_ZMQ_TIMEOUT_FACTOR=300
+++ WM_ZMQ_TIMEOUT_FACTOR=300
++ export SERVER_INFO=/scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/west_zmq_info.json
++ SERVER_INFO=/scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/west_zmq_info.json
++ export WM_ZMQ_MASTER_HEARTBEAT=50
++ WM_ZMQ_MASTER_HEARTBEAT=50
++ export WM_ZMQ_WORKER_HEARTBEAT=50
++ WM_ZMQ_WORKER_HEARTBEAT=50
++ export WM_ZMQ_TIMEOUT_FACTOR=100
++ WM_ZMQ_TIMEOUT_FACTOR=100
++ (( n=0 ))
++ w_run --work-manager=zmq --n-workers=0 --zmq-mode=master --zmq-write-host-info=/scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/west_zmq_info.json --zmq-comm-mode=tcp
++ (( n<60 ))
++ '[' -e /scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/west_zmq_info.json ']'
++ sleep 1
++ (( n++ ))
++ (( n<60 ))
++ '[' -e /scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/west_zmq_info.json ']'
++ cat /scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/west_zmq_info.json
++ break
++ '[' '!' -e /scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/west_zmq_info.json ']'
++ SM_LOG=gpu_dmon_153287.log
++ echo 'Logging SM usage to gpu_dmon_153287.log (every 10s)'
++ DMON_PID=3434724
++ MEM_LOG=gpu_query_153287.log
++ nvidia-smi dmon -s u -d 10
++ echo 'Logging memory/overall usage to gpu_query_153287.log (every 10s)'
++ QPID=3434725
++ export WORKERS_PER_GPU=8
++ nvidia-smi --query-gpu=timestamp,index,name,utilization.gpu,utilization.memory,memory.total,memory.used --format=csv -l 10
++ WORKERS_PER_GPU=8
++ IFS=,
++ read -ra DEVICES
++ total_workers=8
++ echo 'Debug: CUDA_VISIBLE_DEVICES = 0,'
++ echo 'Debug: DEVICES = 0'
++ echo 'Debug: total_workers = 8'
++ '[' 1 -eq 0 ']'
++ for gpuid in "${DEVICES[@]}"
++ (( w=1 ))
++ (( w<=WORKERS_PER_GPU ))
++ (( w++ ))
++ (( w<=WORKERS_PER_GPU ))
++ export CUDA_VISIBLE_DEVICES=0
++ CUDA_VISIBLE_DEVICES=0
++ echo 'Launching worker 1 on GPU 0...'
++ w_run --work-manager=zmq --n-workers=1 --zmq-mode=client --zmq-read-host-info=/scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/west_zmq_info.json --zmq-comm-mode=tcp
++ (( w++ ))
++ (( w<=WORKERS_PER_GPU ))
++ export CUDA_VISIBLE_DEVICES=0
++ CUDA_VISIBLE_DEVICES=0
++ echo 'Launching worker 2 on GPU 0...'
++ w_run --work-manager=zmq --n-workers=1 --zmq-mode=client --zmq-read-host-info=/scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/west_zmq_info.json --zmq-comm-mode=tcp
++ (( w++ ))
++ (( w<=WORKERS_PER_GPU ))
++ export CUDA_VISIBLE_DEVICES=0
++ CUDA_VISIBLE_DEVICES=0
++ echo 'Launching worker 3 on GPU 0...'
++ w_run --work-manager=zmq --n-workers=1 --zmq-mode=client --zmq-read-host-info=/scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/west_zmq_info.json --zmq-comm-mode=tcp
++ (( w++ ))
++ (( w<=WORKERS_PER_GPU ))
++ export CUDA_VISIBLE_DEVICES=0
++ CUDA_VISIBLE_DEVICES=0
++ echo 'Launching worker 4 on GPU 0...'
++ w_run --work-manager=zmq --n-workers=1 --zmq-mode=client --zmq-read-host-info=/scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/west_zmq_info.json --zmq-comm-mode=tcp
++ (( w++ ))
++ (( w<=WORKERS_PER_GPU ))
++ export CUDA_VISIBLE_DEVICES=0
++ CUDA_VISIBLE_DEVICES=0
++ echo 'Launching worker 5 on GPU 0...'
++ w_run --work-manager=zmq --n-workers=1 --zmq-mode=client --zmq-read-host-info=/scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/west_zmq_info.json --zmq-comm-mode=tcp
++ (( w++ ))
++ (( w<=WORKERS_PER_GPU ))
++ export CUDA_VISIBLE_DEVICES=0
++ CUDA_VISIBLE_DEVICES=0
++ echo 'Launching worker 6 on GPU 0...'
++ w_run --work-manager=zmq --n-workers=1 --zmq-mode=client --zmq-read-host-info=/scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/west_zmq_info.json --zmq-comm-mode=tcp
++ (( w++ ))
++ (( w<=WORKERS_PER_GPU ))
++ export CUDA_VISIBLE_DEVICES=0
++ CUDA_VISIBLE_DEVICES=0
++ echo 'Launching worker 7 on GPU 0...'
++ w_run --work-manager=zmq --n-workers=1 --zmq-mode=client --zmq-read-host-info=/scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/west_zmq_info.json --zmq-comm-mode=tcp
++ (( w++ ))
++ (( w<=WORKERS_PER_GPU ))
++ wait
++ export CUDA_VISIBLE_DEVICES=0
++ CUDA_VISIBLE_DEVICES=0
++ echo 'Launching worker 8 on GPU 0...'
++ w_run --work-manager=zmq --n-workers=1 --zmq-mode=client --zmq-read-host-info=/scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/west_zmq_info.json --zmq-comm-mode=tcp

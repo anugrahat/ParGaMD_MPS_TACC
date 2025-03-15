@@ -4,7 +4,7 @@
 #SBATCH --partition=gpu-ahn
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=32
-#SBATCH --gres=gpu:2
+#SBATCH --gres=gpu:1
 #SBATCH --time=120:00:00
 
 ##############################################################################
@@ -85,7 +85,7 @@ QPID=$!
 ##############################################################################
 # 5) Launch GPU workers
 ##############################################################################
-export WORKERS_PER_GPU=12
+export WORKERS_PER_GPU=1
 IFS=',' read -ra DEVICES <<< "$CUDA_VISIBLE_DEVICES"
 total_workers=$(( ${#DEVICES[@]} * WORKERS_PER_GPU ))
 echo "Debug: DEVICES = ${DEVICES[@]}"

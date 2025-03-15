@@ -6,8 +6,10 @@ set -x
 
 
 source ~/.bashrc
-module load conda3/4.X cuda/11.8.0 
-source activate openmm_env
+module load  gcc/14.2.0
+module load  cuda/12.6 
+conda init
+conda  activate openmm_westpa
 
 source env.sh
 

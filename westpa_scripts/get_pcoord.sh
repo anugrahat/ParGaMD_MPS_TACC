@@ -42,8 +42,8 @@ import numpy as np
 from MDAnalysis.analysis import rms
 
 # Absolute paths to your HPC reference/topology files:
-topology = "/home/anugraha/openmm_GaMD_anu_psc/ParGaMD_chig_2/common_files/chignolin.parm7"
-ref_pdb  = "/home/anugraha/openmm_GaMD_anu_psc/ParGaMD_chig_2/common_files/chignolin.pdb"
+topology = "/scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/common_files/chignolin.parm7"
+ref_pdb  = "/scratch/10597/anugrahat/pargamd/ParGaMD_chig_2/common_files/chignolin.pdb"
 
 # Trajectory is local to this segment directory
 trajectory = "output_restart.dcd"
